@@ -1,0 +1,50 @@
+{
+    "generation_info": {
+        "timestamp": "2026-01-02T13:10:09.636333",
+        "main_model": "kimi-k2-thinking",
+        "generator_version": "1.0.1",
+        "repo_path": "/Users/anhnh2220.re/Documents/code/ConnectED",
+        "commit_id": null
+    },
+    "statistics": {
+        "total_components": 67047,
+        "leaf_nodes": 4671,
+        "max_depth": 2
+    },
+    "files_generated": [
+        "overview.md",
+        "module_tree.json",
+        "first_module_tree.json",
+        "authentication.md",
+        "experiment_generation.md",
+        "lesson_sharing.md",
+        "material_management.md",
+        "animation_session_manager.md",
+        "animation_pipeline.md",
+        "lesson_core.md",
+        "lesson_processing.md",
+        "lesson_management.md",
+        "ai_generation_services.md",
+        "generation_state.md",
+        "ai_generation_services_extraction.md",
+        "lesson_plan_presentation.md",
+        "ai_generation_services_chat.md",
+        "database_models.md",
+        "frontend_contexts.md",
+        "generation_state_models.md",
+        "frontend_types.md",
+        "animation_generation.md",
+        "frontend_components.md",
+        "ai_generation_services_analysis.md",
+        "export_services.md",
+        "frontend_api_client.md",
+        "storage_services.md",
+        "animation_session.md",
+        "frontend_state_management.md",
+        "database_layer.md",
+        "mongodb.md",
+        "animation_models.md",
+        "lesson_review.md",
+        "ai_generation_services_generation.md"
+    ]
+}

@@ -1,0 +1,305 @@
+{
+    "database_models": {
+        "path": "backend/app/models",
+        "components": [
+            "backend.app.models.common.TimestampMixin",
+            "backend.app.models.common.JobStatus",
+            "backend.app.models.common.CognitiveLevel",
+            "backend.app.models.common.MaterialType",
+            "backend.app.models.common.PyObjectId",
+            "backend.app.models.common.UserRole",
+            "backend.app.models.common.MongoBaseModel",
+            "backend.app.models.common.JobType",
+            "backend.app.models.common.LessonStatus",
+            "backend.app.models.common.ExtractionStatus",
+            "backend.app.models.common.ActivityType",
+            "backend.app.models.lesson.LessonInDB",
+            "backend.app.models.user.UserInDB",
+            "backend.app.models.user.RefreshTokenInDB",
+            "backend.app.models.job.JobInDB"
+        ],
+        "children": {}
+    },
+    "database_layer": {
+        "path": "backend/app/db",
+        "components": [
+            "backend.app.db.mongodb.MongoDB",
+            "backend.app.db.mongodb.SyncMongoDB",
+            "backend.app.db.repositories.__init__.BaseRepository",
+            "backend.app.db.repositories.lesson.LessonRepository",
+            "backend.app.db.repositories.lesson.JobRepository",
+            "backend.app.db.repositories.user.RefreshTokenRepository",
+            "backend.app.db.repositories.user.UserRepository"
+        ],
+        "children": {}
+    },
+    "lesson_management": {
+        "path": "backend/app/services/lesson.py",
+        "components": [
+            "backend.app.services.lesson.LessonService",
+            "backend.app.models.lesson.CreateLessonRequest",
+            "backend.app.models.lesson.UpdateLessonRequest",
+            "backend.app.models.lesson.LessonDetailResponse",
+            "backend.app.models.lesson.LessonListResponse",
+            "backend.app.models.lesson.SharedLessonResponse",
+            "backend.app.models.lesson.ShareLinkResponse"
+        ],
+        "children": {
+            "lesson_core": {
+                "components": [
+                    "backend.app.services.lesson.LessonService",
+                    "backend.app.models.lesson.CreateLessonRequest",
+                    "backend.app.models.lesson.UpdateLessonRequest",
+                    "backend.app.models.lesson.LessonDetailResponse",
+                    "backend.app.models.lesson.LessonListResponse"
+                ],
+                "children": {}
+            },
+            "lesson_processing": {
+                "components": [
+                    "backend.app.services.lesson.LessonService",
+                    "backend.app.models.lesson.UploadResponse",
+                    "backend.app.models.lesson.ProcessingStatusResponse",
+                    "backend.app.models.lesson.ExtractedContentResponse"
+                ],
+                "children": {}
+            },
+            "lesson_review": {
+                "components": [
+                    "backend.app.services.lesson.LessonService",
+                    "backend.app.models.lesson.StepDataResponse",
+                    "backend.app.models.lesson.ApproveStepResponse",
+                    "backend.app.models.lesson.KeyConceptsResponse",
+                    "backend.app.models.lesson.ObjectivesResponse",
+                    "backend.app.models.lesson.OutlineResponse"
+                ],
+                "children": {}
+            },
+            "lesson_plan_presentation": {
+                "components": [
+                    "backend.app.services.lesson.LessonService",
+                    "backend.app.models.lesson.LessonPlan",
+                    "backend.app.models.lesson.LessonPlanResponse",
+                    "backend.app.models.lesson.LessonPresentation",
+                    "backend.app.models.lesson.PresentationResponse"
+                ],
+                "children": {}
+            },
+            "lesson_sharing": {
+                "components": [
+                    "backend.app.services.lesson.LessonService",
+                    "backend.app.models.lesson.ShareLinkResponse",
+                    "backend.app.models.lesson.SharedLessonResponse"
+                ],
+                "children": {}
+            }
+        }
+    },
+    "material_management": {
+        "path": "backend/app/services/material.py",
+        "components": [
+            "backend.app.services.material.MaterialService",
+            "backend.app.models.material.GenerateMaterialRequest",
+            "backend.app.models.material.GenerateMaterialResponse",
+            "backend.app.models.material.MaterialResponse",
+            "backend.app.models.material.MaterialListResponse",
+            "backend.app.models.material.MaterialPlanResponse",
+            "backend.app.models.material.SharedMaterial"
+        ],
+        "children": {}
+    },
+    "ai_generation_services": {
+        "path": "backend/app/services/ai",
+        "components": [
+            "backend.app.services.ai.generation.GenerationService",
+            "backend.app.services.ai.extraction.ExtractionService",
+            "backend.app.services.ai.analysis.AnalysisService",
+            "backend.app.services.ai.chat.ChatService"
+        ],
+        "children": {
+            "ai_generation_services_generation": {
+                "components": [
+                    "backend.app.services.ai.generation.GenerationService"
+                ],
+                "children": {}
+            },
+            "ai_generation_services_extraction": {
+                "components": [
+                    "backend.app.services.ai.extraction.ExtractionService"
+                ],
+                "children": {}
+            },
+            "ai_generation_services_analysis": {
+                "components": [
+                    "backend.app.services.ai.analysis.AnalysisService"
+                ],
+                "children": {}
+            },
+            "ai_generation_services_chat": {
+                "components": [
+                    "backend.app.services.ai.chat.ChatService"
+                ],
+                "children": {}
+            }
+        }
+    },
+    "animation_generation": {
+        "path": "backend/app/services/ai/visualisation",
+        "components": [
+            "backend.app.services.ai.visualisation.animation_generator.AnimaionGenerator",
+            "backend.app.services.ai.visualisation.animation_generator.AnimationSteps",
+            "backend.app.services.ai.visualisation.plaintext.animation.manim_models.SceneAction",
+            "backend.app.services.ai.visualisation.plaintext.animation.manim_models.RenderResult",
+            "backend.app.services.ai.visualisation.plaintext.animation.manim_models.SceneTransition",
+            "backend.app.services.ai.visualisation.plaintext.animation.manim_models.AnimationMetadata",
+            "backend.app.services.ai.visualisation.plaintext.animation.manim_models.ScenePlan",
+            "backend.app.models.generation_state.GenerationState",
+            "backend.app.models.generation_state.SceneGenerationState",
+            "backend.app.models.generation_state.GenerationStateResponse"
+        ],
+        "children": {
+            "animation_pipeline": {
+                "components": [
+                    "backend.app.services.ai.visualisation.animation_generator.AnimaionGenerator",
+                    "backend.app.services.ai.visualisation.animation_generator.AnimationSteps"
+                ],
+                "children": {}
+            },
+            "animation_models": {
+                "components": [
+                    "backend.app.services.ai.visualisation.plaintext.animation.manim_models.SceneAction",
+                    "backend.app.services.ai.visualisation.plaintext.animation.manim_models.RenderResult",
+                    "backend.app.services.ai.visualisation.plaintext.animation.manim_models.SceneTransition",
+                    "backend.app.services.ai.visualisation.plaintext.animation.manim_models.AnimationMetadata",
+                    "backend.app.services.ai.visualisation.plaintext.animation.manim_models.ScenePlan"
+                ],
+                "children": {}
+            },
+            "generation_state": {
+                "components": [
+                    "backend.app.models.generation_state.GenerationState",
+                    "backend.app.models.generation_state.SceneGenerationState",
+                    "backend.app.models.generation_state.GenerationStateResponse"
+                ],
+                "children": {}
+            }
+        }
+    },
+    "experiment_generation": {
+        "path": "backend/app/services/ai/visualisation/experiment_generator.py",
+        "components": [
+            "backend.app.services.ai.visualisation.experiment_generator.ExperimentGenerator",
+            "backend.app.services.ai.visualisation.experiment_generator.ExperimentSteps",
+            "backend.app.services.ai.visualisation.plaintext.experiment.experiment_models.ExperimentScenario",
+            "backend.app.services.ai.visualisation.plaintext.experiment.experiment_models.ExperimentStep",
+            "backend.app.models.material.UpdateExperimentScenarioRequest"
+        ],
+        "children": {}
+    },
+    "authentication": {
+        "path": "backend/app/services/auth.py",
+        "components": [
+            "backend.app.services.auth.AuthService",
+            "backend.app.models.user.LoginRequest",
+            "backend.app.models.user.TokenResponse",
+            "backend.app.models.user.RefreshRequest",
+            "backend.app.models.user.CreateTeacherRequest",
+            "backend.app.models.user.UpdateTeacherRequest",
+            "backend.app.models.user.UserResponse"
+        ],
+        "children": {}
+    },
+    "export_services": {
+        "path": "backend/app/services/export",
+        "components": [
+            "backend.app.services.export.__init__.ExportService",
+            "backend.app.services.export.docx.DOCXExportService",
+            "backend.app.services.export.pdf.PDFExportService"
+        ],
+        "children": {}
+    },
+    "storage_services": {
+        "path": "backend/app/services/storage.py",
+        "components": [
+            "backend.app.services.storage.StorageService"
+        ],
+        "children": {}
+    },
+    "animation_session": {
+        "path": "backend/app/services/animation_session.py",
+        "components": [
+            "backend.app.services.animation_session.AnimationSessionManager",
+            "backend.app.models.generation_state.StartAnimationWithFeedbackRequest",
+            "backend.app.models.generation_state.StartAnimationWithFeedbackResponse",
+            "backend.app.models.generation_state.SubmitFeedbackRequest",
+            "backend.app.models.generation_state.SceneFeedback",
+            "backend.app.models.generation_state.WSMessage",
+            "backend.app.models.generation_state.WSEventType"
+        ],
+        "children": {
+            "animation_session_manager": {
+                "components": [
+                    "backend.app.services.animation_session.AnimationSessionManager"
+                ],
+                "children": {}
+            },
+            "generation_state_models": {
+                "components": [
+                    "backend.app.models.generation_state.GenerationState",
+                    "backend.app.models.generation_state.SceneGenerationState",
+                    "backend.app.models.generation_state.SceneFeedback",
+                    "backend.app.models.generation_state.WSMessage",
+                    "backend.app.models.generation_state.WSEventType",
+                    "backend.app.models.generation_state.SceneStatus",
+                    "backend.app.models.generation_state.GenerationPhase",
+                    "backend.app.models.generation_state.FeedbackType"
+                ],
+                "children": {}
+            }
+        }
+    },
+    "frontend_state_management": {
+        "path": "frontend/src/stores",
+        "components": [
+            "frontend.src.stores.authStore.AuthState"
+        ],
+        "children": {}
+    },
+    "frontend_api_client": {
+        "path": "frontend/src/services/api.ts",
+        "components": [
+            "frontend.src.services.api.ChatResponse",
+            "frontend.src.services.api.ChatRequest"
+        ],
+        "children": {}
+    },
+    "frontend_types": {
+        "path": "frontend/src/types/index.ts",
+        "components": [
+            "frontend.src.types.index.LessonDetail",
+            "frontend.src.types.index.SharedLesson",
+            "frontend.src.types.index.MaterialPlanResponse",
+            "frontend.src.types.index.PresentationResponse",
+            "frontend.src.types.index.ProcessingStatus",
+            "frontend.src.types.index.AnimationPlan",
+            "frontend.src.types.index.UpdateAnimationPlansRequest",
+            "frontend.src.types.index.UpdateExperimentScenarioRequest",
+            "frontend.src.types.index.StartAnimationWithFeedbackResponse"
+        ],
+        "children": {}
+    },
+    "frontend_contexts": {
+        "path": "frontend/src/contexts/PageContext.tsx",
+        "components": [
+            "frontend.src.contexts.PageContext.PageContextType"
+        ],
+        "children": {}
+    },
+    "frontend_components": {
+        "path": "frontend/src/components",
+        "components": [
+            "frontend.src.components.MaterialLibraryModal.MaterialSelection"
+        ],
+        "children": {}
+    }
+}
